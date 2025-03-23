@@ -1,10 +1,18 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { GosacAuthenticationModule } from './modules/gosac/gosac-authentication/gosac-authentication.module';
+import { GosacModule } from './modules/gosac/gosac.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [GosacAuthenticationModule],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'sqlite',
+      database: 'database.sqlite',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: true,
+    }),
+    GosacModule],
   controllers: [AppController],
   providers: [AppService],
 })
