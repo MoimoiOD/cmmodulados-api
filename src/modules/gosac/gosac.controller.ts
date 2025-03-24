@@ -8,24 +8,14 @@ export class GosacController {
   constructor(private readonly gosacService: GosacService) {}
 
   @Post('message_create')
-  message_create(@Body() createMessageDto) {
-    console.log('Message: ', createMessageDto);
-    console.log('----------------------------------------------');
-    console.log('Ticket: ', createMessageDto.data.ticket);
-    console.log('----------------------------------------------');
-    return this.gosacService.createMessage(createMessageDto);
+  message_create(@Body() createMessageDto: CreateMessageDto) {
+    return this.gosacService.create(createMessageDto);
   }
 
-  @Post('message_update')
-  message_update(@Body() updateMessageDto: any) {
-    console.log(updateMessageDto);
-    // return this.gosacService.update(gosacDto);
-  }
-
-  @Post('ticket_create')
-  ticket_create(@Body() createTicketDto: CreateTicketDto) {
-    console.log(createTicketDto);
-    // return this.gosacService.create(createTicketDto);
-  }
+  // @Post('message_update')
+  // message_update(@Body() updateMessageDto: any) {
+  //   console.log(updateMessageDto);
+  //   // return this.gosacService.update(gosacDto);
+  // }
 
 }

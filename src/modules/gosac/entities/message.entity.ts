@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { Contact } from './contact.entity';
 import { Ticket } from './ticket.entity';
+import { Contact } from './contact.entity';
 
 @Entity()
 export class Message {
@@ -37,7 +37,7 @@ export class Message {
   @Column({ type: 'text' })
   updatedAt: Date;
 
-  @ManyToOne(() => Contact, (contact) => contact.messages)
+  @ManyToOne(() => Contact, (contact) => contact.id)
   contact: Contact;
 
   @ManyToOne(() => Ticket, (ticket) => ticket.id)

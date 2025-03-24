@@ -1,116 +1,108 @@
-import { IsBoolean, IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsDateString, IsInt, IsNotEmpty, IsOptional, IsString, IsNumber } from 'class-validator';
 
 export class CreateContactDto {
-  @IsNumber()
-  @IsNotEmpty()
-  id: number;
+    @IsInt()
+    id: number;
 
-  @IsString()
-  @IsNotEmpty()
-  name: string;
+    @IsString()
+    @IsNotEmpty()
+    name: string;
 
-  @IsString()
-  @IsNotEmpty()
-  number: string;
+    @IsString()
+    @IsNotEmpty()
+    number: string;
 
-  @IsString()
-  @IsOptional()
-  email?: string;
+    @IsOptional()
+    @IsString()
+    email: string;
 
-  @IsString()
-  @IsOptional()
-  profilePicUrl?: string;
+    @IsOptional()
+    @IsString()
+    profilePicUrl: string;
 
-  @IsBoolean()
-  isGroup: boolean;
+    @IsBoolean()
+    isGroup: boolean;
 
-  @IsBoolean()
-  hasWhatsapp: boolean;
+    @IsBoolean()
+    hasWhatsapp: boolean;
 
-  @IsBoolean()
-  hasTelegram: boolean;
+    @IsBoolean()
+    hasTelegram: boolean;
 
-  @IsNumber()
-  @IsOptional()
-  defaultUserId?: number;
+    @IsInt()
+    defaultUserId: number | null;
 
-  @IsNumber()
-  @IsOptional()
-  defaultQueueId?: number;
+    @IsInt()
+    defaultQueueId: number;
 
-  @IsString()
-  @IsOptional()
-  observation?: string;
+    @IsOptional()
+    @IsString()
+    observation: string | null;
 
-  @IsString()
-  @IsOptional()
-  document?: string;
+    @IsOptional()
+    @IsString()
+    document: string | null;
 
-  @IsString()
-  @IsOptional()
-  contract?: string;
+    @IsOptional()
+    @IsString()
+    contract: string | null;
 
-  @IsString()
-  @IsOptional()
-  value?: string;
+    @IsOptional()
+    @IsNumber()
+    value: number | null;
 
-  @IsString()
-  @IsOptional()
-  kind?: string;
+    @IsString()
+    @IsNotEmpty()
+    kind: string;
 
-  @IsBoolean()
-  @IsOptional()
-  imported?: boolean;
+    @IsBoolean()
+    imported: boolean;
 
-  @IsBoolean()
-  @IsOptional()
-  favorite?: boolean;
+    @IsBoolean()
+    favorite: boolean;
 
-  @IsString()
-  @IsOptional()
-  whatsAppId?: string;
+    @IsOptional()
+    @IsInt()
+    whatsAppId: number | null;
 
-  @IsString()
-  @IsOptional()
-  cpf?: string;
+    @IsOptional()
+    @IsString()
+    cpf: string | null;
 
-  @IsString()
-  @IsOptional()
-  instagram?: string;
+    @IsOptional()
+    @IsString()
+    instagram: string | null;
 
-  @IsString()
-  @IsOptional()
-  linkedIn?: string;
+    @IsOptional()
+    @IsString()
+    linkedIn: string | null;
 
-  @IsString()
-  @IsOptional()
-  company?: string;
+    @IsOptional()
+    @IsString()
+    company: string | null;
 
-  @IsString()
-  @IsOptional()
-  cnpj?: string;
+    @IsOptional()
+    @IsString()
+    cnpj: string | null;
 
-  @IsString()
-  @IsOptional()
-  validity?: string;
+    @IsOptional()
+    @IsDateString()
+    validity: string | null;
 
-  @IsString()
-  @IsOptional()
-  telegramId?: string;
+    @IsOptional()
+    @IsInt()
+    telegramId: number | null;
 
-  @IsString()
-  @IsOptional()
-  telegramUsername?: string;
+    @IsOptional()
+    @IsString()
+    telegramUsername: string | null;
 
-  @IsBoolean()
-  @IsOptional()
-  blacklist?: boolean;
+    @IsBoolean()
+    blacklist: boolean;
 
-  @IsDateString()
-  @IsOptional()
-  createdAt?: string;
+    @IsDateString()
+    createdAt: string;
 
-  @IsDateString()
-  @IsOptional()
-  updatedAt?: string;
+    @IsDateString()
+    updatedAt: string;
 }
