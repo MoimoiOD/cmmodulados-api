@@ -3,6 +3,9 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 @Entity()
 export class Contact {
     @PrimaryGeneratedColumn()
+    databaseId: number;
+
+    @Column({ type: 'int', unique: true })
     id: number;
 
     @Column()
@@ -26,8 +29,8 @@ export class Contact {
     @Column()
     hasTelegram: boolean;
 
-    @Column()
-    defaultUserId: number;
+    @Column({ type: 'int', nullable: true })
+    defaultUserId: number| null;
 
     @Column()
     defaultQueueId: number;

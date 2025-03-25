@@ -33,67 +33,166 @@ export class GosacService {
     private readonly whatsappRepository: Repository<Whatsapp>
   ) {}
 
-  async create(createMessageDto: CreateMessageDto): Promise<Message> {
+  async create(createMessageDto: CreateMessageDto): Promise<void> {
 
     const messageData = createMessageDto.data;
 
-    const messageContact = messageData.contact;
-    await this.createContact(messageContact);
     const messageTicketUser = messageData.ticket.user;
     await this.createUser(messageTicketUser);
     const messageTicketQueue = messageData.ticket.queue;
     await this.createQueue(messageTicketQueue);
     const messageTicketWhatsapp = messageData.ticket.whatsapp;
     await this.createWhatsapp(messageTicketWhatsapp);
+    const messageContact = messageData.contact;
+    await this.createContact(messageContact);
     const messageTicket = messageData.ticket;
     await this.createTicket(messageTicket);
 
-    return await this.createMessageData(messageData);
+    await this.delay(500);
+
+    await this.createMessageData(messageData);
   }
 
-  async createContact(createContactDto: CreateContactDto): Promise<Contact> {
-    return new Promise(async (resolve, reject) => {
+  async createUser(createUserDto: CreateUserDto): Promise<void> {
+    const existingUser = await this.userRepository.findOneBy({ id: createUserDto.id });
+  
+    if (existingUser) {
+      const isDataCompatible = Object.keys(createUserDto).every(
+        (key) => existingUser[key] === createUserDto[key]
+      );
+  
+      if (!isDataCompatible) {
+        await this.userRepository.update(existingUser.id, createUserDto);
+        console.log(`Usuário com ID ${existingUser.id} foi atualizado.`);
+      } else {
+        console.log(`Usuário com ID ${existingUser.id} já existe e os dados são compatíveis.`);
+      }
+    } else {
+      const user = this.userRepository.create(createUserDto);
+      await this.userRepository.save(user);
+      console.log(`Novo usuário com ID ${createUserDto.id} foi criado.`);
+    }
+  }
+
+  async createQueue(createQueueDto: CreateQueueDto): Promise<void> {
+    const existingQueue = await this.queueRepository.findOneBy({ id: createQueueDto.id });
+  
+    if (existingQueue) {
+      const isDataCompatible = Object.keys(createQueueDto).every(
+        (key) => existingQueue[key] === createQueueDto[key]
+      );
+  
+      if (!isDataCompatible) {
+        await this.queueRepository.update(existingQueue.id, createQueueDto);
+        console.log(`Fila com ID ${existingQueue.id} foi atualizada.`);
+      } else {
+        console.log(`Fila com ID ${existingQueue.id} já existe e os dados são compatíveis.`);
+      }
+    } else {
+      const queue = this.queueRepository.create(createQueueDto);
+      await this.queueRepository.save(queue);
+      console.log(`Nova fila com ID ${createQueueDto.id} foi criada.`);
+    }
+  }
+
+  async createWhatsapp(createWhatsappDto: CreateWhatsappDto): Promise<void> {
+    const existingWhatsapp = await this.whatsappRepository.findOneBy({ id: createWhatsappDto.id });
+  
+    if (existingWhatsapp) {
+      const isDataCompatible = Object.keys(createWhatsappDto).every(
+        (key) => existingWhatsapp[key] === createWhatsappDto[key]
+      );
+  
+      if (!isDataCompatible) {
+        await this.whatsappRepository.update(existingWhatsapp.id, createWhatsappDto);
+        console.log(`WhatsApp com ID ${existingWhatsapp.id} foi atualizado.`);
+      } else {
+        console.log(`WhatsApp com ID ${existingWhatsapp.id} já existe e os dados são compatíveis.`);
+      }
+    } else {
+      const whatsapp = this.whatsappRepository.create(createWhatsappDto);
+      await this.whatsappRepository.save(whatsapp);
+      console.log(`Novo WhatsApp com ID ${createWhatsappDto.id} foi criado.`);
+    }
+  }
+
+  async createContact(createContactDto: CreateContactDto): Promise<void> {
+    const existingContact = await this.contactRepository.findOneBy({ id: createContactDto.id });
+  
+    if (existingContact) {
+      const isDataCompatible = Object.keys(createContactDto).every(
+        (key) => existingContact[key] === createContactDto[key]
+      );
+  
+      if (!isDataCompatible) {
+        await this.contactRepository.update(existingContact.id, createContactDto);
+        console.log(`Contato com ID ${existingContact.id} foi atualizado.`);
+      } else {
+        console.log(`Contato com ID ${existingContact.id} já existe e os dados são compatíveis.`);
+      }
+    } else {
       const contact = plainToInstance(Contact, createContactDto);
-      resolve(this.contactRepository.save(contact));
-    })
+      const newContact = this.contactRepository.create(contact);
+      await this.contactRepository.save(newContact);
+      console.log(`Novo contato com ID ${createContactDto.id} foi criado.`);
+    }
   }
 
-  async createUser(createUserDto: CreateUserDto): Promise<User> {
-    return new Promise(async (resolve, reject) => {
-      const user = plainToInstance(User, createUserDto);
-      resolve(this.userRepository.save(user));
-    })
+  async createTicket(createTicketDto: CreateTicketDto): Promise<void> {
+
+    const user = await this.userRepository.findOneBy({ id: createTicketDto.userId });
+    const whatsapp = await this.whatsappRepository.findOneBy({ id: createTicketDto.whatsappId });
+    const queue = await this.queueRepository.findOneBy({ id: createTicketDto.queueId });
+    const contact = await this.contactRepository.findOneBy({ id: createTicketDto.contactId });
+
+    if (!user) {
+      throw new Error(`Usuário com ID ${createTicketDto.userId} não encontrado.`);
+    }
+
+    if (!whatsapp) {
+      throw new Error(`WhatsApp com ID ${createTicketDto.whatsappId} não encontrado.`);
+    }
+
+    if (!queue) {
+      throw new Error(`Fila com ID ${createTicketDto.queueId} não encontrada.`);
+    }
+
+    if (!contact) {
+      throw new Error(`Contato com ID ${createTicketDto.contactId} não encontrado.`);
+    }
+
+    const ticket = plainToInstance(Ticket, createTicketDto);
+    ticket.user = user;
+    ticket.whatsapp = whatsapp;
+    ticket.queue = queue;
+    ticket.contact = contact;
+    const newTicket = this.ticketRepository.create(ticket);
+    this.ticketRepository.save(newTicket);
+    console.log(`Novo ticket com ID ${createTicketDto.id} foi criado.`);
   }
 
-  async createQueue(createQueueDto: CreateQueueDto): Promise<Queue> {
-    return new Promise(async (resolve, reject) => {
-      const message = this.queueRepository.create(createQueueDto);
-      resolve(this.queueRepository.save(message));
-    })
-  }
+  async createMessageData(createMessageDataDto: CreateMessageDataDto): Promise<void> {
+    const ticket = await this.ticketRepository.findOneBy({ id: createMessageDataDto.ticketId });
+    const contact = await this.contactRepository.findOneBy({ id: createMessageDataDto.contactId });
 
-  async createWhatsapp(createWhatsappDto: CreateWhatsappDto): Promise<Whatsapp> {
-    return new Promise(async (resolve, reject) => {
-      const message = this.whatsappRepository.create(createWhatsappDto);
-      resolve(this.whatsappRepository.save(message));
-    })
-  }
+    if (!ticket) {
+      throw new Error(`Ticket com ID ${createMessageDataDto.ticketId} não encontrado.`);
+    }
+  
+    if (!contact) {
+      throw new Error(`Contato com ID ${createMessageDataDto.contactId} não encontrado.`);
+    }
 
-  async createTicket(createTicketDto: CreateTicketDto): Promise<Ticket> {
-    return new Promise(async (resolve, reject) => {
-      const message = this.ticketRepository.create(createTicketDto);
-      resolve(this.ticketRepository.save(message));
-    })
-  }
-
-  async createMessageData(createMessageDataDto: CreateMessageDataDto): Promise<Message> {
-    return new Promise(async (resolve, reject) => {
-      const message = this.messageRepository.create(createMessageDataDto);
-      resolve(this.messageRepository.save(message));
-    })
+    const messageData = plainToInstance(Message, createMessageDataDto);
+    messageData.ticket = ticket;
+    messageData.contact = contact;
+    const newMessageData = this.messageRepository.create(messageData);
+    this.messageRepository.save(newMessageData);
+    console.log(`Novo messageData com ID ${createMessageDataDto.id} foi criado.`);
   }
 
   async delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
+
 }

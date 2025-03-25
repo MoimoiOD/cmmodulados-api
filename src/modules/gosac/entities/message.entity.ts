@@ -1,10 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Ticket } from './ticket.entity';
 import { Contact } from './contact.entity';
 
 @Entity()
 export class Message {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn()
+  databaseId: number;
+
+  @Column({ type: 'int', unique: true })
   id: string;
 
   @Column()
@@ -36,10 +39,13 @@ export class Message {
 
   @Column({ type: 'text' })
   updatedAt: Date;
+  
+  @ManyToOne(() => Ticket, (ticket) => ticket.databaseId)
+  @JoinColumn({ name: 'ticketId' })
+  ticket: Ticket;
 
-  @ManyToOne(() => Contact, (contact) => contact.id)
+  @ManyToOne(() => Contact, (contact) => contact.databaseId)
+  @JoinColumn({ name: 'contactId' })
   contact: Contact;
 
-  @ManyToOne(() => Ticket, (ticket) => ticket.id)
-  ticket: Ticket;
 }

@@ -13,30 +13,33 @@ export class CreateMessageDataDto {
   mediaPath: string | null;
 
   @IsString()
-  @IsNotEmpty()
   id: string;
 
+  @IsOptional()
   @IsInt()
   ack: number;
 
+  @IsOptional()
   @IsBoolean()
   read: boolean;
 
+  @IsOptional()
   @IsBoolean()
   fromMe: boolean;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
   body: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
   mediaType: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
   messageId: string;
 
+  @IsOptional()
   @IsInt()
   queueId: number;
 
@@ -44,12 +47,15 @@ export class CreateMessageDataDto {
   @IsInt()
   templateId: number | null;
 
+  @IsOptional()
   @IsBoolean()
   isDeleted: boolean;
 
+  @IsOptional()
   @IsDateString()
   createdAt: string;
 
+  @IsOptional()
   @IsDateString()
   updatedAt: string;
 
@@ -57,18 +63,23 @@ export class CreateMessageDataDto {
   @IsString()
   quotedMsgId: string | null;
 
+  @IsOptional()
   @IsInt()
   ticketId: number;
 
+  @IsOptional()
   @IsInt()
   contactId: number;
 
+  @IsOptional()
   @IsInt()
   groupContactId: number;
 
+  @IsOptional()
   @IsBoolean()
   fromGroup: boolean;
 
+  @IsOptional()
   @IsInt()
   connectionId: number;
 
@@ -76,6 +87,7 @@ export class CreateMessageDataDto {
   @IsInt()
   vcardContactId: number | null;
 
+  @IsOptional()
   @IsBoolean()
   isForwarded: boolean;
 
@@ -87,6 +99,7 @@ export class CreateMessageDataDto {
   @IsInt()
   destinationUserId: number | null;
 
+  @IsOptional()
   @IsBoolean()
   sent: boolean;
 
@@ -98,14 +111,15 @@ export class CreateMessageDataDto {
   @IsString()
   errorMessage: string | null;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
   kind: string;
 
   @IsOptional()
   @IsInt()
   transmissionId: number | null;
 
+  @IsOptional()
   @IsBoolean()
   downloaded: boolean;
 
@@ -117,12 +131,10 @@ export class CreateMessageDataDto {
   @IsString()
   quotedMsg: string | null;
 
-  @IsNotEmpty()
   @ValidateNested()
   @Type(() => CreateContactDto)
   contact: CreateContactDto;
 
-  @IsNotEmpty()
   @ValidateNested()
   @Type(() => CreateTicketDto)
   ticket: CreateTicketDto;

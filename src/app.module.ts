@@ -11,6 +11,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       database: 'database.sqlite',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
+      dropSchema: true,
     }),
     GosacModule],
   controllers: [AppController],

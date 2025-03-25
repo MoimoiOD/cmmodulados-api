@@ -8,51 +8,55 @@ export class CreateWhatsappDto {
     @IsInt()
     id: number;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     name: string;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     session: string;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     qrcode: string;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     status: string;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     battery: string;
 
+    @IsOptional()
     @IsBoolean()
     plugged: boolean;
 
+    @IsOptional()
     @IsInt()
     defaultQueueId: number;
 
+    @IsOptional()
     @IsInt()
     retries: number;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     greetingMessage: string;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     closeMessage: string;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     outTimeMessage: string;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     contingencyMessage: string;
 
+    @IsOptional()
     @IsString()
     greetingArchive: string;
 
@@ -60,35 +64,43 @@ export class CreateWhatsappDto {
     @IsString()
     endContingencyMessage: string | null;
 
+    @IsOptional()
     @IsBoolean()
     isDefault: boolean;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     startTime: string;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     finishTime: string;
 
+    @IsOptional()
     @IsBoolean()
     sum: boolean;
 
+    @IsOptional()
     @IsBoolean()
     mon: boolean;
 
+    @IsOptional()
     @IsBoolean()
     tue: boolean;
 
+    @IsOptional()
     @IsBoolean()
     wed: boolean;
 
+    @IsOptional()
     @IsBoolean()
     thu: boolean;
 
+    @IsOptional()
     @IsBoolean()
     fri: boolean;
 
+    @IsOptional()
     @IsBoolean()
     sat: boolean;
 
@@ -96,20 +108,24 @@ export class CreateWhatsappDto {
     @IsDateString()
     resetAt: string | null;
 
+    @IsOptional()
     @IsDateString()
     syncAt: string;
 
+    @IsOptional()
     @IsInt()
     syncPercent: number;
 
+    @IsOptional()
     @IsBoolean()
     enabled: boolean;
 
+    @IsOptional()
     @IsDateString()
     startedAt: string;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     type: string;
 
     @IsOptional()
@@ -120,8 +136,8 @@ export class CreateWhatsappDto {
     @IsString()
     apiHash: string | null;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     phoneNumber: string;
 
     @IsOptional()
@@ -160,26 +176,31 @@ export class CreateWhatsappDto {
     @IsInt()
     messagingLimit: number | null;
 
+    @IsOptional()
     @IsBoolean()
     npsEnabled: boolean;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     npsMessage: string;
 
     @IsOptional()
     @IsString()
     provider: string | null;
 
+    @IsOptional()
     @IsBoolean()
     settedWebHook: boolean;
 
+    @IsOptional()
     @IsBoolean()
     enableZeroMenu: boolean;
 
+    @IsOptional()
     @IsInt()
     openingHoursId: number;
 
+    @IsOptional()
     @IsDateString()
     qrCreatedAt: string;
 
@@ -191,12 +212,15 @@ export class CreateWhatsappDto {
     @IsInt()
     port: number | null;
 
+    @IsOptional()
     @IsBoolean()
     tls: boolean;
 
+    @IsOptional()
     @IsDateString()
     createdAt: string;
 
+    @IsOptional()
     @IsDateString()
     updatedAt: string;
 

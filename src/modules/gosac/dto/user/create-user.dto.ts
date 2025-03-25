@@ -1,38 +1,42 @@
-import { IsBoolean, IsDateString, IsEmail, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, IsUUID } from 'class-validator';
+import { IsBoolean, IsDateString, IsEmail, IsInt , IsNumber, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class CreateUserDto {
     @IsInt()
     id: number;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     name: string;
 
+    @IsOptional()
     @IsEmail()
     email: string;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     passwordHash: string;
 
+    @IsOptional()
     @IsInt()
     tokenVersion: number;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     profileSlug: string;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     username: string;
 
     @IsOptional()
     @IsString()
     avatar: string | null;
 
+    @IsOptional()
     @IsBoolean()
     showAllQueuesMessages: boolean;
 
+    @IsOptional()
     @IsBoolean()
     active: boolean;
 
@@ -44,8 +48,8 @@ export class CreateUserDto {
     @IsNumber()
     limitTicketsOpening: number | null;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     cpf: string;
 
     @IsOptional()
@@ -64,10 +68,11 @@ export class CreateUserDto {
     @IsDateString()
     changedPasswordAt: string | null;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     userNotification: string;
 
+    @IsOptional()
     @IsInt()
     isManager: number;
 
@@ -75,30 +80,35 @@ export class CreateUserDto {
     @IsInt()
     defaultQueueId: number | null;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     token: string;
 
+    @IsOptional()
     @IsBoolean()
     viewAllGroups: boolean;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     limitTicketsOpeningType: string;
 
+    @IsOptional()
     @IsBoolean()
     limitTicketsOpeningNotification: boolean;
 
+    @IsOptional()
     @IsBoolean()
     limitTicketsNotification: boolean;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     logUsersAccess: string;
 
+    @IsOptional()
     @IsDateString()
     createdAt: string;
 
+    @IsOptional()
     @IsDateString()
     updatedAt: string;
 

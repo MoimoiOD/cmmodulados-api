@@ -3,6 +3,9 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
+    databaseId: number;
+
+    @Column({ type: 'int', unique: true })
     id: number;
 
     @Column({ type: 'varchar', length: 255 })

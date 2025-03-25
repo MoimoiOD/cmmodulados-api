@@ -3,6 +3,9 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 @Entity()
 export class Queue {
     @PrimaryGeneratedColumn()
+    databaseId: number;
+
+    @Column({ type: 'int', unique: true })
     id: number;
 
     @Column({ type: 'varchar', length: 255 })

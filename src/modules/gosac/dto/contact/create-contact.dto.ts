@@ -1,15 +1,15 @@
-import { IsBoolean, IsDateString, IsInt, IsNotEmpty, IsOptional, IsString, IsNumber } from 'class-validator';
+import { IsBoolean, IsDateString, IsInt,IsOptional, IsString, IsNumber } from 'class-validator';
 
 export class CreateContactDto {
     @IsInt()
     id: number;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     name: string;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     number: string;
 
     @IsOptional()
@@ -20,18 +20,23 @@ export class CreateContactDto {
     @IsString()
     profilePicUrl: string;
 
+    @IsOptional()
     @IsBoolean()
     isGroup: boolean;
 
+    @IsOptional()
     @IsBoolean()
     hasWhatsapp: boolean;
 
+    @IsOptional()
     @IsBoolean()
     hasTelegram: boolean;
 
+    @IsOptional()
     @IsInt()
     defaultUserId: number | null;
 
+    @IsOptional()
     @IsInt()
     defaultQueueId: number;
 
@@ -51,13 +56,15 @@ export class CreateContactDto {
     @IsNumber()
     value: number | null;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     kind: string;
 
+    @IsOptional()
     @IsBoolean()
     imported: boolean;
 
+    @IsOptional()
     @IsBoolean()
     favorite: boolean;
 
@@ -97,12 +104,15 @@ export class CreateContactDto {
     @IsString()
     telegramUsername: string | null;
 
+    @IsOptional()
     @IsBoolean()
     blacklist: boolean;
 
+    @IsOptional()
     @IsDateString()
     createdAt: string;
 
+    @IsOptional()
     @IsDateString()
     updatedAt: string;
 }

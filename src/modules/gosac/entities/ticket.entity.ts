@@ -7,6 +7,9 @@ import { Contact } from './contact.entity';
 @Entity()
 export class Ticket {
     @PrimaryGeneratedColumn()
+    databaseId: number;
+
+    @Column({ type: 'int' })
     id: number;
 
     @Column({ type: 'varchar', length: 255 })

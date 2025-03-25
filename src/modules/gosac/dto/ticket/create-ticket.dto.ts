@@ -8,55 +8,64 @@ export class CreateTicketDto {
     @IsInt()
     id: number;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     status: string;
 
+    @IsOptional()
     @IsInt()
     unreadMessages: number;
 
+    @IsOptional()
     @IsInt()
     unreadMessages2: number;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     lastMessage: string;
 
+    @IsOptional()
     @IsBoolean()
     isGroup: boolean;
 
+    @IsOptional()
     @IsInt()
     userId: number;
 
+    @IsOptional()
     @IsInt()
     contactId: number;
 
+    @IsOptional()
     @IsInt()
     whatsappId: number;
 
+    @IsOptional()
     @IsInt()
     queueId: number;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     protocol: string;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     lastAction: string;
 
     @IsOptional()
     @IsInt()
     destinationUserId: number | null;
 
+    @IsOptional()
     @IsInt()
     statusBot: number;
 
+    @IsOptional()
     @IsInt()
     syncTotal: number;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     onMenu: string;
 
     @IsOptional()
@@ -67,6 +76,7 @@ export class CreateTicketDto {
     @IsDateString()
     closedAt: string | null;
 
+    @IsOptional()
     @IsDateString()
     lastMessageAt: string;
 
@@ -82,10 +92,11 @@ export class CreateTicketDto {
     @IsInt()
     transmissionId: number | null;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     kind: string;
 
+    @IsOptional()
     @IsInt()
     onMenuId: number;
 
@@ -93,21 +104,23 @@ export class CreateTicketDto {
     @IsString()
     window: string | null;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     closureObservation: string;
 
     @IsOptional()
     @IsString()
     sourceUrl: string | null;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     origin: string;
 
+    @IsOptional()
     @IsDateString()
     createdAt: string;
 
+    @IsOptional()
     @IsDateString()
     updatedAt: string;
 
