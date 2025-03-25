@@ -10,41 +10,41 @@ export class Message {
   @Column({ type: 'int', unique: true })
   id: string;
 
-  @Column()
+  @Column({ nullable: true })
   ack: number;
 
-  @Column()
+  @Column({ nullable: true })
   read: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   fromMe: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   body: string;
 
-  @Column()
+  @Column({ nullable: true })
   mediaType: string;
 
-  @Column()
+  @Column({ nullable: true })
   messageId: string;
 
-  @Column()
+  @Column({ nullable: true })
   queueId: number;
 
-  @Column()
+  @Column({ nullable: true })
   isDeleted: boolean;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   createdAt: Date;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   updatedAt: Date;
   
-  @ManyToOne(() => Ticket, (ticket) => ticket.databaseId)
+  @ManyToOne(() => Ticket, (ticket) => ticket.databaseId, { nullable: true })
   @JoinColumn({ name: 'ticketId' })
   ticket: Ticket;
 
-  @ManyToOne(() => Contact, (contact) => contact.databaseId)
+  @ManyToOne(() => Contact, (contact) => contact.databaseId, { nullable: true })
   @JoinColumn({ name: 'contactId' })
   contact: Contact;
 

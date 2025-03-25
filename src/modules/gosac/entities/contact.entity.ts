@@ -8,10 +8,10 @@ export class Contact {
     @Column({ type: 'int', unique: true })
     id: number;
 
-    @Column()
+    @Column({ nullable: true })
     name: string;
 
-    @Column()
+    @Column({ nullable: true })
     number: string;
 
     @Column({ nullable: true })
@@ -20,19 +20,19 @@ export class Contact {
     @Column({ nullable: true })
     profilePicUrl: string;
 
-    @Column()
+    @Column({ nullable: true })
     isGroup: boolean;
 
-    @Column()
+    @Column({ nullable: true })
     hasWhatsapp: boolean;
 
-    @Column()
+    @Column({ nullable: true })
     hasTelegram: boolean;
 
-    @Column({ type: 'int', nullable: true })
+    @Column({ type: 'int', nullable: true})
     defaultUserId: number| null;
 
-    @Column()
+    @Column({ nullable: true })
     defaultQueueId: number;
 
     @Column({ type: 'text', nullable: true })
@@ -47,13 +47,13 @@ export class Contact {
     @Column('decimal', { nullable: true })
     value: number | null;
 
-    @Column()
+    @Column({ nullable: true })
     kind: string;
 
-    @Column()
+    @Column({ nullable: true })
     imported: boolean;
 
-    @Column()
+    @Column({ nullable: true })
     favorite: boolean;
 
     @Column({ type: 'integer', nullable: true })
@@ -83,12 +83,12 @@ export class Contact {
     @Column({ type: 'text', nullable: true })
     telegramUsername: string | null;
 
-    @Column()
+    @Column({ nullable: true })
     blacklist: boolean;
 
-    @Column({ type: 'datetime' })
+    @Column({ type: 'datetime', nullable: true })
     createdAt: string;
 
-    @Column({ type: 'datetime' })
+    @Column({ type: 'datetime', nullable: true })
     updatedAt: string;
 }

@@ -9,6 +9,7 @@ export class GosacController {
 
   @Post('message_create')
   message_create(@Body() createMessageDto: CreateMessageDto) {
+    console.log(createMessageDto);
     return this.gosacService.create(createMessageDto);
   }
 
