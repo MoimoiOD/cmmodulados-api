@@ -38,10 +38,8 @@ export class GosacService {
       console.log('Os dados da mensagem não foram informados.');
       return;
     }
-  
     const messageData = createMessageDto.data;
   
-    // Validação e criação do usuário
     const messageTicketUser = messageData.ticket?.user;
     if (messageTicketUser) {
       await this.createUser(messageTicketUser);
@@ -49,7 +47,6 @@ export class GosacService {
       console.log('O usuário do ticket não foi informado.');
     }
   
-    // Validação e criação da fila
     const messageTicketQueue = messageData.ticket?.queue;
     if (messageTicketQueue) {
       await this.createQueue(messageTicketQueue);
@@ -57,7 +54,6 @@ export class GosacService {
       console.log('A fila do ticket não foi informada.');
     }
   
-    // Validação e criação do WhatsApp
     const messageTicketWhatsapp = messageData.ticket?.whatsapp;
     if (messageTicketWhatsapp) {
       await this.createWhatsapp(messageTicketWhatsapp);
@@ -65,7 +61,6 @@ export class GosacService {
       console.log('O WhatsApp do ticket não foi informado.');
     }
   
-    // Validação e criação do contato
     const messageContact = messageData.contact;
     if (messageContact) {
       await this.createContact(messageContact);
@@ -73,7 +68,6 @@ export class GosacService {
       console.log('O contato da mensagem não foi informado.');
     }
   
-    // Validação e criação do ticket
     const messageTicket = messageData.ticket;
     if (messageTicket) {
       await this.createTicket(messageTicket);
@@ -81,10 +75,8 @@ export class GosacService {
       console.log('O ticket da mensagem não foi informado.');
     }
   
-    // Delay para evitar problemas de concorrência
     await this.delay(500);
   
-    // Validação e criação dos dados da mensagem
     if (messageData) {
       await this.createMessageData(messageData);
     } else {

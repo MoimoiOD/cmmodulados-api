@@ -1,7 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { GosacService } from './gosac.service';
 import { CreateMessageDto } from './dto/message/create-message.dto';
-import { CreateTicketDto } from './dto/ticket/create-ticket.dto';
 
 @Controller('gosac')
 export class GosacController {
@@ -9,6 +8,13 @@ export class GosacController {
 
   @Post('message_create')
   message_create(@Body() createMessageDto: CreateMessageDto) {
+    console.log('Message: ', createMessageDto.data);
+    console.log('Contact Message: ', createMessageDto.data.contact);
+    console.log('Ticket Message: ', createMessageDto.data.ticket);
+    console.log('User: ', createMessageDto.data.ticket?.user);
+    console.log('Queue: ', createMessageDto.data.ticket?.queue);
+    console.log('Contact', createMessageDto.data.ticket?.contact);
+    console.log('Whatsapp: ', createMessageDto.data.ticket?.whatsapp);
     return this.gosacService.create(createMessageDto);
   }
 
