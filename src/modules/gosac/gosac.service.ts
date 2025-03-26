@@ -92,11 +92,8 @@ export class GosacService {
     const existingUser = await this.userRepository.findOneBy({ id: createUserDto.id });
   
     if (existingUser) {
-      const isDataCompatible = Object.keys(createUserDto).every(
-        (key) => existingUser[key] === createUserDto[key]
-      );
-  
-      if (!isDataCompatible) {
+      const hasChanges = JSON.stringify(existingUser) !== JSON.stringify(createUserDto);
+      if (!hasChanges) {
         await this.userRepository.update(existingUser.id, createUserDto);
         console.log(`Usuário com ID ${existingUser.id} foi atualizado.`);
       } else {
@@ -117,11 +114,8 @@ export class GosacService {
     const existingQueue = await this.queueRepository.findOneBy({ id: createQueueDto.id });
   
     if (existingQueue) {
-      const isDataCompatible = Object.keys(createQueueDto).every(
-        (key) => existingQueue[key] === createQueueDto[key]
-      );
-  
-      if (!isDataCompatible) {
+      const hasChanges = JSON.stringify(existingQueue) !== JSON.stringify(createQueueDto);
+      if (!hasChanges) {
         await this.queueRepository.update(existingQueue.id, createQueueDto);
         console.log(`Fila com ID ${existingQueue.id} foi atualizada.`);
       } else {
@@ -142,11 +136,8 @@ export class GosacService {
     const existingWhatsapp = await this.whatsappRepository.findOneBy({ id: createWhatsappDto.id });
   
     if (existingWhatsapp) {
-      const isDataCompatible = Object.keys(createWhatsappDto).every(
-        (key) => existingWhatsapp[key] === createWhatsappDto[key]
-      );
-  
-      if (!isDataCompatible) {
+      const hasChanges = JSON.stringify(existingWhatsapp) !== JSON.stringify(createWhatsappDto);
+      if (!hasChanges) {
         await this.whatsappRepository.update(existingWhatsapp.id, createWhatsappDto);
         console.log(`WhatsApp com ID ${existingWhatsapp.id} foi atualizado.`);
       } else {
@@ -167,11 +158,8 @@ export class GosacService {
     const existingContact = await this.contactRepository.findOneBy({ id: createContactDto.id });
   
     if (existingContact) {
-      const isDataCompatible = Object.keys(createContactDto).every(
-        (key) => existingContact[key] === createContactDto[key]
-      );
-  
-      if (!isDataCompatible) {
+      const hasChanges = JSON.stringify(existingContact) !== JSON.stringify(createContactDto);
+      if (!hasChanges) {
         await this.contactRepository.update(existingContact.id, createContactDto);
         console.log(`Contato com ID ${existingContact.id} foi atualizado.`);
       } else {
