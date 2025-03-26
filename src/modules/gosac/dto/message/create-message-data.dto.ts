@@ -17,31 +17,31 @@ export class CreateMessageDataDto {
 
   @IsOptional()
   @IsInt()
-  ack: number;
+  ack: number | null;
 
   @IsOptional()
   @IsBoolean()
-  read: boolean;
+  read: boolean | null;
 
   @IsOptional()
   @IsBoolean()
-  fromMe: boolean;
+  fromMe: boolean | null;
 
   @IsOptional()
   @IsString()
-  body: string;
+  body: string | null;
 
   @IsOptional()
   @IsString()
-  mediaType: string;
-
-  @IsOptional()
-  @IsString()
-  messageId: string;
+  mediaType: string | null;
 
   @IsOptional()
   @IsInt()
-  queueId: number;
+  messageId: string | null;
+
+  @IsOptional()
+  @IsInt()
+  queueId: number | null;
 
   @IsOptional()
   @IsInt()
@@ -49,15 +49,15 @@ export class CreateMessageDataDto {
 
   @IsOptional()
   @IsBoolean()
-  isDeleted: boolean;
+  isDeleted: boolean | null;
 
   @IsOptional()
   @IsDateString()
-  createdAt: string;
+  createdAt: string | null;
 
   @IsOptional()
   @IsDateString()
-  updatedAt: string;
+  updatedAt: string | null;
 
   @IsOptional()
   @IsString()
@@ -73,15 +73,15 @@ export class CreateMessageDataDto {
 
   @IsOptional()
   @IsInt()
-  groupContactId: number;
+  groupContactId: number | null;
 
   @IsOptional()
   @IsBoolean()
-  fromGroup: boolean;
+  fromGroup: boolean | null;
 
   @IsOptional()
   @IsInt()
-  connectionId: number;
+  connectionId: number | null;
 
   @IsOptional()
   @IsInt()
@@ -89,7 +89,7 @@ export class CreateMessageDataDto {
 
   @IsOptional()
   @IsBoolean()
-  isForwarded: boolean;
+  isForwarded: boolean | null;
 
   @IsOptional()
   @IsInt()
@@ -101,7 +101,7 @@ export class CreateMessageDataDto {
 
   @IsOptional()
   @IsBoolean()
-  sent: boolean;
+  sent: boolean | null;
 
   @IsOptional()
   @IsInt()
@@ -113,7 +113,7 @@ export class CreateMessageDataDto {
 
   @IsOptional()
   @IsString()
-  kind: string;
+  kind: string | null;
 
   @IsOptional()
   @IsInt()
@@ -121,7 +121,7 @@ export class CreateMessageDataDto {
 
   @IsOptional()
   @IsBoolean()
-  downloaded: boolean;
+  downloaded: boolean | null;
 
   @IsOptional()
   @IsString()
@@ -133,9 +133,9 @@ export class CreateMessageDataDto {
 
   @ValidateNested()
   @Type(() => CreateContactDto)
-  contact: CreateContactDto;
+  contact: CreateContactDto | null;
 
   @ValidateNested()
   @Type(() => CreateTicketDto)
-  ticket: CreateTicketDto;
+  ticket: CreateTicketDto | null;
 }

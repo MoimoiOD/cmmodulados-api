@@ -5,41 +5,41 @@ export class Queue {
     @PrimaryGeneratedColumn()
     databaseId: number;
 
-    @Column({ type: 'int', unique: true })
+    @Column({ type: 'int' })
     id: number;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    name: string;
+    name: string | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    color: string;
+    color: string | null;
 
     @Column({ type: 'varchar', nullable: true })
-    greetingMessage: string;
+    greetingMessage: string | null;
 
     @Column({ type: 'varchar', nullable: true })
-    greetingArchive: string;
+    greetingArchive: string | null;
 
     @Column({ type: 'int', nullable: true })
-    order: number;
+    order: number | null;
 
     @Column({ type: 'int', nullable: true })
     defaultUserId: number | null;
 
     @Column({ type: 'boolean', default: false, nullable: true })
-    autoClose: boolean;
+    autoClose: boolean | null;
 
     @Column({ type: 'boolean', default: false, nullable: true })
-    noEvaluation: boolean;
+    noEvaluation: boolean | null;
 
     @Column({ type: 'boolean', default: false, nullable: true })
-    returnMainMenu: boolean;
+    returnMainMenu: boolean | null;
 
     @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP', nullable: true })
-    createdAt: string;
+    createdAt: string | null;
 
     @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP', nullable: true })
-    updatedAt: string;
+    updatedAt: string | null;
 
     @Column({ type: 'datetime', nullable: true })
     deletedAt: string | null;

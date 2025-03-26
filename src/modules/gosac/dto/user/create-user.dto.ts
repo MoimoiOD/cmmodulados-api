@@ -6,27 +6,27 @@ export class CreateUserDto {
 
     @IsOptional()
     @IsString()
-    name: string;
+    name: string | null;
 
     @IsOptional()
     @IsEmail()
-    email: string;
+    email: string | null;
 
     @IsOptional()
     @IsString()
-    passwordHash: string;
+    passwordHash: string | null;
 
     @IsOptional()
     @IsInt()
-    tokenVersion: number;
+    tokenVersion: number | null;
 
     @IsOptional()
     @IsString()
-    profileSlug: string;
+    profileSlug: string | null;
 
     @IsOptional()
     @IsString()
-    username: string;
+    username: string | null;
 
     @IsOptional()
     @IsString()
@@ -34,11 +34,11 @@ export class CreateUserDto {
 
     @IsOptional()
     @IsBoolean()
-    showAllQueuesMessages: boolean;
+    showAllQueuesMessages: boolean | null;
 
     @IsOptional()
     @IsBoolean()
-    active: boolean;
+    active: boolean | null;
 
     @IsOptional()
     @IsNumber()
@@ -50,7 +50,7 @@ export class CreateUserDto {
 
     @IsOptional()
     @IsString()
-    cpf: string;
+    cpf: string | null;
 
     @IsOptional()
     @IsString()
@@ -70,11 +70,11 @@ export class CreateUserDto {
 
     @IsOptional()
     @IsString()
-    userNotification: string;
+    userNotification: string | null;
 
     @IsOptional()
     @IsInt()
-    isManager: number;
+    isManager: number | null;
 
     @IsOptional()
     @IsInt()
@@ -82,35 +82,35 @@ export class CreateUserDto {
 
     @IsOptional()
     @IsString()
-    token: string;
+    token: string | null;
 
     @IsOptional()
     @IsBoolean()
-    viewAllGroups: boolean;
+    viewAllGroups: boolean | null;
 
     @IsOptional()
     @IsString()
-    limitTicketsOpeningType: string;
+    limitTicketsOpeningType: string | null;
 
     @IsOptional()
     @IsBoolean()
-    limitTicketsOpeningNotification: boolean;
+    limitTicketsOpeningNotification: boolean | null;
 
     @IsOptional()
     @IsBoolean()
-    limitTicketsNotification: boolean;
+    limitTicketsNotification: boolean | null;
 
     @IsOptional()
     @IsString()
-    logUsersAccess: string;
+    logUsersAccess: string | null;
 
     @IsOptional()
     @IsDateString()
-    createdAt: string;
+    createdAt: string | null;
 
     @IsOptional()
     @IsDateString()
-    updatedAt: string;
+    updatedAt: string | null;
 
     @IsOptional()
     @IsDateString()

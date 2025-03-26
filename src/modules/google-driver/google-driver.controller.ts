@@ -7,28 +7,9 @@ import { UpdateGoogleDriverDto } from './dto/update-google-driver.dto';
 export class GoogleDriverController {
   constructor(private readonly googleDriverService: GoogleDriverService) {}
 
-  @Post()
-  create(@Body() createGoogleDriverDto: CreateGoogleDriverDto) {
-    return this.googleDriverService.create(createGoogleDriverDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.googleDriverService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.googleDriverService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGoogleDriverDto: UpdateGoogleDriverDto) {
-    return this.googleDriverService.update(+id, updateGoogleDriverDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.googleDriverService.remove(+id);
+  @Post('create-folder')
+  async createFolder(@Body('name') folderName: string, @Body('parentId') parentFolderId?: string) {
+    const folderId = await this.googleDriverService.createFolder(folderName, parentFolderId);
+    return { folderId };
   }
 }

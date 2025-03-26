@@ -6,31 +6,31 @@ export class CreateContactDto {
 
     @IsOptional()
     @IsString()
-    name: string;
+    name: string | null;
 
     @IsOptional()
     @IsString()
-    number: string;
+    number: string | null;
 
     @IsOptional()
     @IsString()
-    email: string;
+    email: string | null;
 
     @IsOptional()
     @IsString()
-    profilePicUrl: string;
+    profilePicUrl: string | null;
 
     @IsOptional()
     @IsBoolean()
-    isGroup: boolean;
+    isGroup: boolean | null;
 
     @IsOptional()
     @IsBoolean()
-    hasWhatsapp: boolean;
+    hasWhatsapp: boolean | null;
 
     @IsOptional()
     @IsBoolean()
-    hasTelegram: boolean;
+    hasTelegram: boolean | null;
 
     @IsOptional()
     @IsInt()
@@ -38,7 +38,7 @@ export class CreateContactDto {
 
     @IsOptional()
     @IsInt()
-    defaultQueueId: number;
+    defaultQueueId: number | null;
 
     @IsOptional()
     @IsString()
@@ -58,15 +58,15 @@ export class CreateContactDto {
 
     @IsOptional()
     @IsString()
-    kind: string;
+    kind: string | null;
 
     @IsOptional()
     @IsBoolean()
-    imported: boolean;
+    imported: boolean | null;
 
     @IsOptional()
     @IsBoolean()
-    favorite: boolean;
+    favorite: boolean | null;
 
     @IsOptional()
     @IsInt()
@@ -74,7 +74,7 @@ export class CreateContactDto {
 
     @IsOptional()
     @IsString()
-    cpf: string | null;
+    cpf: string | null | null;
 
     @IsOptional()
     @IsString()
@@ -106,13 +106,13 @@ export class CreateContactDto {
 
     @IsOptional()
     @IsBoolean()
-    blacklist: boolean;
+    blacklist: boolean | null;
 
     @IsOptional()
     @IsDateString()
-    createdAt: string;
+    createdAt: string | null;
 
     @IsOptional()
     @IsDateString()
-    updatedAt: string;
+    updatedAt: string | null;
 }

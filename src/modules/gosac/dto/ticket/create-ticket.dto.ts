@@ -10,23 +10,23 @@ export class CreateTicketDto {
 
     @IsOptional()
     @IsString()
-    status: string;
+    status: string | null;
 
     @IsOptional()
     @IsInt()
-    unreadMessages: number;
+    unreadMessages: number | null;
 
     @IsOptional()
     @IsInt()
-    unreadMessages2: number;
+    unreadMessages2: number | null;
 
     @IsOptional()
     @IsString()
-    lastMessage: string;
+    lastMessage: string | null;
 
     @IsOptional()
     @IsBoolean()
-    isGroup: boolean;
+    isGroup: boolean | null;
 
     @IsOptional()
     @IsInt()
@@ -46,11 +46,11 @@ export class CreateTicketDto {
 
     @IsOptional()
     @IsString()
-    protocol: string;
+    protocol: string | null;
 
     @IsOptional()
     @IsString()
-    lastAction: string;
+    lastAction: string | null;
 
     @IsOptional()
     @IsInt()
@@ -58,15 +58,15 @@ export class CreateTicketDto {
 
     @IsOptional()
     @IsInt()
-    statusBot: number;
+    statusBot: number | null;
 
     @IsOptional()
     @IsInt()
-    syncTotal: number;
+    syncTotal: number | null;
 
     @IsOptional()
     @IsString()
-    onMenu: string;
+    onMenu: string | null;
 
     @IsOptional()
     @IsInt()
@@ -78,7 +78,7 @@ export class CreateTicketDto {
 
     @IsOptional()
     @IsDateString()
-    lastMessageAt: string;
+    lastMessageAt: string | null;
 
     @IsOptional()
     @IsInt()
@@ -94,11 +94,11 @@ export class CreateTicketDto {
 
     @IsOptional()
     @IsString()
-    kind: string;
+    kind: string | null;
 
     @IsOptional()
     @IsInt()
-    onMenuId: number;
+    onMenuId: number | null;
 
     @IsOptional()
     @IsString()
@@ -106,7 +106,7 @@ export class CreateTicketDto {
 
     @IsOptional()
     @IsString()
-    closureObservation: string;
+    closureObservation: string | null;
 
     @IsOptional()
     @IsString()
@@ -114,25 +114,25 @@ export class CreateTicketDto {
 
     @IsOptional()
     @IsString()
-    origin: string;
+    origin: string | null;
 
     @IsOptional()
     @IsDateString()
-    createdAt: string;
+    createdAt: string | null;
 
     @IsOptional()
     @IsDateString()
-    updatedAt: string;
+    updatedAt: string | null;
 
-    @IsNotEmpty()
-    contact: CreateContactDto;
+    @IsOptional()
+    contact: CreateContactDto | null;
 
-    @IsNotEmpty()
-    queue: CreateQueueDto;
+    @IsOptional()
+    queue: CreateQueueDto | null;
 
-    @IsNotEmpty()
-    whatsapp: CreateWhatsappDto;
+    @IsOptional()
+    whatsapp: CreateWhatsappDto | null;
 
-    @IsNotEmpty()
-    user: CreateUserDto;
+    @IsOptional()
+    user: CreateUserDto | null;
 }

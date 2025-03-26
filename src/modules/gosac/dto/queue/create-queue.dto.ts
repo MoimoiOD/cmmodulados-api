@@ -6,47 +6,47 @@ export class CreateQueueDto {
 
     @IsOptional()
     @IsString()
-    name: string;
+    name: string | null;
 
     @IsOptional()
     @IsString()
-    color: string;
+    color: string | null;
 
     @IsOptional()
     @IsString()
-    greetingMessage: string;
+    greetingMessage: string | null;
 
     @IsOptional()
     @IsString()
-    greetingArchive: string;
+    greetingArchive: string | null;
 
     @IsOptional()
     @IsInt()
-    order: number;
+    order: number | null;
 
     @IsOptional()
     @IsInt()
-    defaultUserId: number;
+    defaultUserId: number | null;
 
     @IsOptional()
     @IsBoolean()
-    autoClose: boolean;
+    autoClose: boolean | null;
 
     @IsOptional()
     @IsBoolean()
-    noEvaluation: boolean;
+    noEvaluation: boolean | null;
 
     @IsOptional()
     @IsBoolean()
-    returnMainMenu: boolean;
+    returnMainMenu: boolean | null;
 
     @IsOptional()
     @IsDateString()
-    createdAt: string;
+    createdAt: string | null;
 
     @IsOptional()
     @IsDateString()
-    updatedAt: string;
+    updatedAt: string | null;
 
     @IsOptional()
     @IsDateString()

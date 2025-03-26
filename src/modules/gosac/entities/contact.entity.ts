@@ -5,35 +5,35 @@ export class Contact {
     @PrimaryGeneratedColumn()
     databaseId: number;
 
-    @Column({ type: 'int', unique: true })
+    @Column({ type: 'int' })
     id: number;
 
-    @Column({ nullable: true })
-    name: string;
+    @Column({ type: 'varchar', nullable: true })
+    name: string | null;
 
-    @Column({ nullable: true })
-    number: string;
+    @Column({ type: 'varchar', nullable: true })
+    number: string | null;
 
-    @Column({ nullable: true })
-    email: string;
+    @Column({ type: 'varchar', nullable: true })
+    email: string | null;
 
-    @Column({ nullable: true })
-    profilePicUrl: string;
+    @Column({ type: 'varchar', nullable: true })
+    profilePicUrl: string | null;
 
-    @Column({ nullable: true })
-    isGroup: boolean;
+    @Column({ type: 'boolean', nullable: true })
+    isGroup: boolean | null;
 
-    @Column({ nullable: true })
-    hasWhatsapp: boolean;
+    @Column({ type: 'boolean', nullable: true })
+    hasWhatsapp: boolean | null;
 
-    @Column({ nullable: true })
-    hasTelegram: boolean;
+    @Column({ type: 'boolean', nullable: true })
+    hasTelegram: boolean | null;
 
-    @Column({ type: 'int', nullable: true})
-    defaultUserId: number| null;
+    @Column({ type: 'int', nullable: true })
+    defaultUserId: number | null; 
 
-    @Column({ nullable: true })
-    defaultQueueId: number;
+    @Column({ type: 'int', nullable: true })
+    defaultQueueId: number | null;
 
     @Column({ type: 'text', nullable: true })
     observation: string | null;
@@ -47,14 +47,14 @@ export class Contact {
     @Column('decimal', { nullable: true })
     value: number | null;
 
-    @Column({ nullable: true })
-    kind: string;
+    @Column({ type: 'text', nullable: true })
+    kind: string | null;
 
-    @Column({ nullable: true })
-    imported: boolean;
+    @Column({ type: 'boolean', nullable: true })
+    imported: boolean | null;
 
-    @Column({ nullable: true })
-    favorite: boolean;
+    @Column({ type: 'boolean', nullable: true })
+    favorite: boolean | null;
 
     @Column({ type: 'integer', nullable: true })
     whatsAppId: number | null;
@@ -83,12 +83,12 @@ export class Contact {
     @Column({ type: 'text', nullable: true })
     telegramUsername: string | null;
 
-    @Column({ nullable: true })
-    blacklist: boolean;
+    @Column({ type: 'boolean', nullable: true })
+    blacklist: boolean | null;
 
     @Column({ type: 'datetime', nullable: true })
-    createdAt: string;
+    createdAt: string | null;
 
     @Column({ type: 'datetime', nullable: true })
-    updatedAt: string;
+    updatedAt: string | null;
 }

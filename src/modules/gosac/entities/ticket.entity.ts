@@ -13,49 +13,49 @@ export class Ticket {
     id: number;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    status: string;
+    status: string | null;
 
     @Column({ type: 'int', nullable: true })
-    unreadMessages: number;
+    unreadMessages: number | null;
 
     @Column({ type: 'int', nullable: true })
-    unreadMessages2: number;
+    unreadMessages2: number | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    lastMessage: string;
+    lastMessage: string | null;
 
     @Column({ type: 'boolean', nullable: true })
-    isGroup: boolean;
+    isGroup: boolean | null;
 
     @Column({ type: 'int', nullable: true })
-    userId: number;
+    userId: number | null;
 
     @Column({ type: 'int', nullable: true })
-    contactId: number;
+    contactId: number | null;
 
     @Column({ type: 'int', nullable: true })
-    whatsappId: number;
+    whatsappId: number | null;
 
     @Column({ type: 'int', nullable: true })
-    queueId: number;
+    queueId: number | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    protocol: string;
+    protocol: string | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    lastAction: string;
+    lastAction: string | null;
 
     @Column({ type: 'int', nullable: true })
     destinationUserId: number | null;
 
     @Column({ type: 'int', nullable: true })
-    statusBot: number;
+    statusBot: number | null;
 
     @Column({ type: 'int', nullable: true })
-    syncTotal: number;
+    syncTotal: number | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    onMenu: string;
+    onMenu: string | null;
 
     @Column({ type: 'int', nullable: true })
     npsValue: number | null;
@@ -64,7 +64,7 @@ export class Ticket {
     closedAt: string | null;
 
     @Column({ type: 'datetime', nullable: true })
-    lastMessageAt: string;
+    lastMessageAt: string | null;
 
     @Column({ type: 'int', nullable: true })
     departmentId: number | null;
@@ -76,10 +76,10 @@ export class Ticket {
     transmissionId: number | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    kind: string;
+    kind: string | null;
 
     @Column({ type: 'int', nullable: true })
-    onMenuId: number;
+    onMenuId: number | null;
 
     @Column({ type: 'varchar', nullable: true })
     window: string | null;
@@ -91,27 +91,27 @@ export class Ticket {
     sourceUrl: string | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    origin: string;
+    origin: string | null;
 
     @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP', nullable: true })
-    createdAt: string;
+    createdAt: string | null;
 
     @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP', nullable: true })
-    updatedAt: string;
+    updatedAt: string | null;
 
     @ManyToOne(() => Contact, { nullable: true })
     @JoinColumn({ name: 'contactId' })
-    contact: Contact;
+    contact: Contact | null;
 
     @ManyToOne(() => User, { nullable: true })
     @JoinColumn({ name: 'userId' })
-    user: User;
+    user: User | null;
 
     @ManyToOne(() => Queue, { nullable: true })
     @JoinColumn({ name: 'queueId' })
-    queue: Queue;
+    queue: Queue | null;
 
     @ManyToOne(() => Whatsapp, { nullable: true })
     @JoinColumn({ name: 'whatsappId' })
-    whatsapp: Whatsapp;
+    whatsapp: Whatsapp | null;
 }

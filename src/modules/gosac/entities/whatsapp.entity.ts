@@ -5,101 +5,101 @@ export class Whatsapp {
     @PrimaryGeneratedColumn()
     databaseId: number;
 
-    @Column({ type: 'int', unique: true })
+    @Column({ type: 'int' })
     id: number;
 
     @Column({ type: 'varchar', nullable: true })
     mediaUrl: string | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    name: string;
+    name: string | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    session: string;
+    session: string | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    qrcode: string;
+    qrcode: string | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    status: string;
+    status: string | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    battery: string;
+    battery: string | null;
 
     @Column({ type: 'boolean', nullable: true })
-    plugged: boolean;
+    plugged: boolean | null;
 
     @Column({ type: 'int', nullable: true })
-    defaultQueueId: number;
+    defaultQueueId: number | null;
 
     @Column({ type: 'int', nullable: true })
-    retries: number;
+    retries: number | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    greetingMessage: string;
+    greetingMessage: string | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    closeMessage: string;
+    closeMessage: string | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    outTimeMessage: string;
+    outTimeMessage: string | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    contingencyMessage: string;
+    contingencyMessage: string | null;
 
     @Column({ type: 'varchar', nullable: true })
-    greetingArchive: string;
+    greetingArchive: string | null;
 
     @Column({ type: 'varchar', nullable: true })
     endContingencyMessage: string | null;
 
     @Column({ type: 'boolean', nullable: true })
-    isDefault: boolean;
+    isDefault: boolean | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    startTime: string;
+    startTime: string | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    finishTime: string;
+    finishTime: string | null;
 
     @Column({ type: 'boolean', nullable: true })
-    sum: boolean;
+    sum: boolean | null;
 
     @Column({ type: 'boolean', nullable: true })
-    mon: boolean;
+    mon: boolean | null;
 
     @Column({ type: 'boolean', nullable: true })
-    tue: boolean;
+    tue: boolean | null;
 
     @Column({ type: 'boolean', nullable: true })
-    wed: boolean;
+    wed: boolean | null;
 
     @Column({ type: 'boolean', nullable: true })
-    thu: boolean;
+    thu: boolean | null;
 
     @Column({ type: 'boolean', nullable: true })
-    fri: boolean;
+    fri: boolean | null;
 
     @Column({ type: 'boolean', nullable: true })
-    sat: boolean;
+    sat: boolean | null;
 
     @Column({ type: 'datetime', nullable: true })
     resetAt: string | null;
 
     @Column({ type: 'datetime', nullable: true })
-    syncAt: string;
+    syncAt: string | null;
 
     @Column({ type: 'int', nullable: true })
-    syncPercent: number;
+    syncPercent: number | null;
 
     @Column({ type: 'boolean', nullable: true })
-    enabled: boolean;
+    enabled: boolean | null;
 
     @Column({ type: 'datetime', nullable: true })
-    startedAt: string;
+    startedAt: string | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    type: string;
+    type: string | null;
 
     @Column({ type: 'varchar', nullable: true })
     apiId: string | null;
@@ -108,7 +108,7 @@ export class Whatsapp {
     apiHash: string | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    phoneNumber: string;
+    phoneNumber: string | null;
 
     @Column({ type: 'varchar', nullable: true })
     secretCode: string | null;
@@ -138,25 +138,25 @@ export class Whatsapp {
     messagingLimit: number | null;
 
     @Column({ type: 'boolean', nullable: true })
-    npsEnabled: boolean;
+    npsEnabled: boolean | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    npsMessage: string;
+    npsMessage: string | null;
 
     @Column({ type: 'varchar', nullable: true })
     provider: string | null;
 
     @Column({ type: 'boolean', nullable: true })
-    settedWebHook: boolean;
+    settedWebHook: boolean | null;
 
     @Column({ type: 'boolean', nullable: true })
-    enableZeroMenu: boolean;
+    enableZeroMenu: boolean | null;
 
     @Column({ type: 'int', nullable: true })
-    openingHoursId: number;
+    openingHoursId: number | null;
 
     @Column({ type: 'datetime', nullable: true })
-    qrCreatedAt: string;
+    qrCreatedAt: string | null;
 
     @Column({ type: 'varchar', nullable: true })
     host: string | null;
@@ -165,13 +165,13 @@ export class Whatsapp {
     port: number | null;
 
     @Column({ type: 'boolean', nullable: true })
-    tls: boolean;
+    tls: boolean | null;
 
     @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP', nullable: true })
-    createdAt: string;
+    createdAt: string | null;
 
     @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP', nullable: true })
-    updatedAt: string;
+    updatedAt: string | null;
 
     @Column({ type: 'datetime', nullable: true })
     deletedAt: string | null;

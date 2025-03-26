@@ -9,31 +9,31 @@ export class User {
     id: number;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    name: string;
+    name: string | null;
 
     @Column({ type: 'varchar', length: 255, unique: true, nullable: true })
-    email: string;
+    email: string | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    passwordHash: string;
+    passwordHash: string | null;
 
     @Column({ type: 'int', default: 0, nullable: true })
-    tokenVersion: number;
+    tokenVersion: number | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    profileSlug: string;
+    profileSlug: string | null;
 
     @Column({ type: 'varchar', length: 255, unique: true, nullable: true })
-    username: string;
+    username: string | null;
 
     @Column({ type: 'varchar', nullable: true })
     avatar: string | null;
 
     @Column({ type: 'boolean', default: false, nullable: true })
-    showAllQueuesMessages: boolean;
+    showAllQueuesMessages: boolean | null;
 
     @Column({ type: 'boolean', default: true, nullable: true })
-    active: boolean;
+    active: boolean | null;
 
     @Column({ type: 'int', nullable: true })
     limitTickets: number | null;
@@ -42,7 +42,7 @@ export class User {
     limitTicketsOpening: number | null;
 
     @Column({ type: 'varchar', length: 14, nullable: true })
-    cpf: string;
+    cpf: string | null;
 
     @Column({ type: 'varchar', nullable: true })
     rg: string | null;
@@ -57,37 +57,37 @@ export class User {
     changedPasswordAt: string | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    userNotification: string;
+    userNotification: string | null;
 
     @Column({ type: 'int', default: 0, nullable: true })
-    isManager: number;
+    isManager: number | null;
 
     @Column({ type: 'int', nullable: true })
     defaultQueueId: number | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    token: string;
+    token: string | null;
 
     @Column({ type: 'boolean', default: false, nullable: true })
-    viewAllGroups: boolean;
+    viewAllGroups: boolean | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    limitTicketsOpeningType: string;
+    limitTicketsOpeningType: string | null;
 
     @Column({ type: 'boolean', default: false, nullable: true })
-    limitTicketsOpeningNotification: boolean;
+    limitTicketsOpeningNotification: boolean | null;
 
     @Column({ type: 'boolean', default: false, nullable: true })
-    limitTicketsNotification: boolean;
+    limitTicketsNotification: boolean | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    logUsersAccess: string;
+    logUsersAccess: string | null;
 
     @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP', nullable: true })
-    createdAt: string;
+    createdAt: string | null;
 
     @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP', nullable: true })
-    updatedAt: string;
+    updatedAt: string | null;
 
     @Column({ type: 'datetime', nullable: true })
     deletedAt: string | null;

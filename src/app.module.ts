@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GosacModule } from './modules/gosac/gosac.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { GoogleDriverModule } from './modules/google-driver/google-driver.module';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true,
       dropSchema: true,
     }),
-    GosacModule],
+    GosacModule, GoogleDriverModule],
   controllers: [AppController],
   providers: [AppService],
 })

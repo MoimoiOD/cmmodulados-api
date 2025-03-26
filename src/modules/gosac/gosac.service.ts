@@ -37,16 +37,16 @@ export class GosacService {
 
     const messageData = createMessageDto.data;
 
-    const messageTicketUser = messageData.ticket.user;
-    await this.createUser(messageTicketUser);
-    const messageTicketQueue = messageData.ticket.queue;
-    await this.createQueue(messageTicketQueue);
-    const messageTicketWhatsapp = messageData.ticket.whatsapp;
-    await this.createWhatsapp(messageTicketWhatsapp);
+    const messageTicketUser = messageData.ticket!.user;
+    await this.createUser(messageTicketUser!);
+    const messageTicketQueue = messageData.ticket!.queue;
+    await this.createQueue(messageTicketQueue!);
+    const messageTicketWhatsapp = messageData.ticket!.whatsapp;
+    await this.createWhatsapp(messageTicketWhatsapp!);
     const messageContact = messageData.contact;
-    await this.createContact(messageContact);
+    await this.createContact(messageContact!);
     const messageTicket = messageData.ticket;
-    await this.createTicket(messageTicket);
+    await this.createTicket(messageTicket!);
 
     await this.delay(500);
 

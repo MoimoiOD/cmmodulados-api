@@ -5,5 +5,6 @@ import { GoogleDriverController } from './google-driver.controller';
 @Module({
   controllers: [GoogleDriverController],
   providers: [GoogleDriverService],
+  exports: [GoogleDriverService],
 })
 export class GoogleDriverModule {}

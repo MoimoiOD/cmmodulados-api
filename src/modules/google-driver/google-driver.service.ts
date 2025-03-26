@@ -1,26 +1,43 @@
 import { Injectable } from '@nestjs/common';
-import { CreateGoogleDriverDto } from './dto/create-google-driver.dto';
-import { UpdateGoogleDriverDto } from './dto/update-google-driver.dto';
+import { google } from 'googleapis';
+import * as fs from 'fs';
 
 @Injectable()
 export class GoogleDriverService {
-  create(createGoogleDriverDto: CreateGoogleDriverDto) {
-    return 'This action adds a new googleDriver';
+  private driveClient;
+
+  constructor() {
+    this.authenticate();
   }
 
-  findAll() {
-    return `This action returns all googleDriver`;
+  private authenticate() {
+    const credentials = JSON.parse(fs.readFileSync('cmm-driver-ebd38f90990a.json', 'utf8'));
+
+    const auth = new google.auth.GoogleAuth({
+      credentials,
+      scopes: ['https://www.googleapis.com/auth/drive'],
+    });
+
+    this.driveClient = google.drive({ version: 'v3', auth });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} googleDriver`;
-  }
+  async createFolder(folderName: string, parentFolderId?: string) {
+    try {
+      const fileMetadata = {
+        name: folderName,
+        mimeType: 'application/vnd.google-apps.folder',
+        ...(parentFolderId && { parents: [parentFolderId] }),
+      };
 
-  update(id: number, updateGoogleDriverDto: UpdateGoogleDriverDto) {
-    return `This action updates a #${id} googleDriver`;
-  }
+      const folder = await this.driveClient.files.create({
+        resource: fileMetadata,
+        fields: 'id',
+      });
 
-  remove(id: number) {
-    return `This action removes a #${id} googleDriver`;
+      return folder.data.id;
+    } catch (error) {
+      console.error('Erro ao criar pasta:', error);
+      throw error;
+    }
   }
 }
