@@ -34,26 +34,69 @@ export class GosacService {
   ) {}
 
   async create(createMessageDto: CreateMessageDto): Promise<void> {
-
+    if (!createMessageDto || !createMessageDto.data) {
+      console.log('Os dados da mensagem não foram informados.');
+      return;
+    }
+  
     const messageData = createMessageDto.data;
-
-    const messageTicketUser = messageData.ticket!.user;
-    await this.createUser(messageTicketUser!);
-    const messageTicketQueue = messageData.ticket!.queue;
-    await this.createQueue(messageTicketQueue!);
-    const messageTicketWhatsapp = messageData.ticket!.whatsapp;
-    await this.createWhatsapp(messageTicketWhatsapp!);
+  
+    // Validação e criação do usuário
+    const messageTicketUser = messageData.ticket?.user;
+    if (messageTicketUser) {
+      await this.createUser(messageTicketUser);
+    } else {
+      console.log('O usuário do ticket não foi informado.');
+    }
+  
+    // Validação e criação da fila
+    const messageTicketQueue = messageData.ticket?.queue;
+    if (messageTicketQueue) {
+      await this.createQueue(messageTicketQueue);
+    } else {
+      console.log('A fila do ticket não foi informada.');
+    }
+  
+    // Validação e criação do WhatsApp
+    const messageTicketWhatsapp = messageData.ticket?.whatsapp;
+    if (messageTicketWhatsapp) {
+      await this.createWhatsapp(messageTicketWhatsapp);
+    } else {
+      console.log('O WhatsApp do ticket não foi informado.');
+    }
+  
+    // Validação e criação do contato
     const messageContact = messageData.contact;
-    await this.createContact(messageContact!);
+    if (messageContact) {
+      await this.createContact(messageContact);
+    } else {
+      console.log('O contato da mensagem não foi informado.');
+    }
+  
+    // Validação e criação do ticket
     const messageTicket = messageData.ticket;
-    await this.createTicket(messageTicket!);
-
+    if (messageTicket) {
+      await this.createTicket(messageTicket);
+    } else {
+      console.log('O ticket da mensagem não foi informado.');
+    }
+  
+    // Delay para evitar problemas de concorrência
     await this.delay(500);
-
-    await this.createMessageData(messageData);
+  
+    // Validação e criação dos dados da mensagem
+    if (messageData) {
+      await this.createMessageData(messageData);
+    } else {
+      console.log('Os dados da mensagem não foram informados.');
+    }
   }
 
   async createUser(createUserDto: CreateUserDto): Promise<void> {
+    if(!createUserDto) {
+      console.log('O usuário não foi informado.');
+      return;
+    }
     const existingUser = await this.userRepository.findOneBy({ id: createUserDto.id });
   
     if (existingUser) {
@@ -75,6 +118,10 @@ export class GosacService {
   }
 
   async createQueue(createQueueDto: CreateQueueDto): Promise<void> {
+    if(!createQueueDto) {
+      console.log('A fila não foi informada.');
+      return;
+    }
     const existingQueue = await this.queueRepository.findOneBy({ id: createQueueDto.id });
   
     if (existingQueue) {
@@ -96,6 +143,10 @@ export class GosacService {
   }
 
   async createWhatsapp(createWhatsappDto: CreateWhatsappDto): Promise<void> {
+    if(!createWhatsappDto) {
+      console.log('O WhatsApp não foi informado.');
+      return;
+    }
     const existingWhatsapp = await this.whatsappRepository.findOneBy({ id: createWhatsappDto.id });
   
     if (existingWhatsapp) {
@@ -117,6 +168,10 @@ export class GosacService {
   }
 
   async createContact(createContactDto: CreateContactDto): Promise<void> {
+    if(!createContactDto) {
+      console.log('O contato não foi informado.');
+      return;
+    }
     const existingContact = await this.contactRepository.findOneBy({ id: createContactDto.id });
   
     if (existingContact) {
@@ -139,27 +194,14 @@ export class GosacService {
   }
 
   async createTicket(createTicketDto: CreateTicketDto): Promise<void> {
-
+    if(!createTicketDto) {
+      console.log('O ticket não foi informado.');
+      return;
+    }
     const user = await this.userRepository.findOneBy({ id: createTicketDto.userId });
     const whatsapp = await this.whatsappRepository.findOneBy({ id: createTicketDto.whatsappId });
     const queue = await this.queueRepository.findOneBy({ id: createTicketDto.queueId });
     const contact = await this.contactRepository.findOneBy({ id: createTicketDto.contactId });
-
-    if (!user) {
-      throw new Error(`Usuário com ID ${createTicketDto.userId} não encontrado.`);
-    }
-
-    if (!whatsapp) {
-      throw new Error(`WhatsApp com ID ${createTicketDto.whatsappId} não encontrado.`);
-    }
-
-    if (!queue) {
-      throw new Error(`Fila com ID ${createTicketDto.queueId} não encontrada.`);
-    }
-
-    if (!contact) {
-      throw new Error(`Contato com ID ${createTicketDto.contactId} não encontrado.`);
-    }
 
     const ticket = plainToInstance(Ticket, createTicketDto);
     ticket.user = user;
@@ -172,16 +214,12 @@ export class GosacService {
   }
 
   async createMessageData(createMessageDataDto: CreateMessageDataDto): Promise<void> {
+    if(!createMessageDataDto) {
+      console.log('O messageData não foi informado.');
+      return;
+    }
     const ticket = await this.ticketRepository.findOneBy({ id: createMessageDataDto.ticketId });
-    const contact = await this.contactRepository.findOneBy({ id: createMessageDataDto.contactId });
-
-    if (!ticket) {
-      throw new Error(`Ticket com ID ${createMessageDataDto.ticketId} não encontrado.`);
-    }
-  
-    if (!contact) {
-      throw new Error(`Contato com ID ${createMessageDataDto.contactId} não encontrado.`);
-    }
+    const contact = await this.contactRepository.findOneBy({ id: createMessageDataDto.contactId }); 
 
     const messageData = plainToInstance(Message, createMessageDataDto);
     messageData.ticket = ticket;

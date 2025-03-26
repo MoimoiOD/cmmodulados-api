@@ -99,10 +99,10 @@ export class Message {
 
   @ManyToOne(() => Contact, (contact) => contact.databaseId, { nullable: true })
   @JoinColumn({ name: 'contactId' })
-  contact: Contact;
+  contact: Contact | null;
 
   @ManyToOne(() => Ticket, (ticket) => ticket.databaseId, { nullable: true })
   @JoinColumn({ name: 'ticketId' })
-  ticket: Ticket;
+  ticket: Ticket | null;
 
 }

@@ -1,8 +1,9 @@
-import { IsBoolean, IsDateString, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsDateString, IsInt, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { CreateContactDto } from '../contact/create-contact.dto';
 import { CreateQueueDto } from '../queue/create-queue.dto';
 import { CreateWhatsappDto } from '../whatsapp/create-whatsapp.dto';
 import { CreateUserDto } from '../user/create-user.dto';
+import { Type } from 'class-transformer';
 
 export class CreateTicketDto {
     @IsInt()
@@ -124,15 +125,19 @@ export class CreateTicketDto {
     @IsDateString()
     updatedAt: string | null;
 
-    @IsOptional()
+    @ValidateNested()
+    @Type(() => CreateContactDto)
     contact: CreateContactDto | null;
 
-    @IsOptional()
+    @ValidateNested()
+    @Type(() => CreateQueueDto)
     queue: CreateQueueDto | null;
 
-    @IsOptional()
+    @ValidateNested()
+    @Type(() => CreateWhatsappDto)
     whatsapp: CreateWhatsappDto | null;
 
-    @IsOptional()
+    @ValidateNested()
+    @Type(() => CreateUserDto)
     user: CreateUserDto | null;
 }
