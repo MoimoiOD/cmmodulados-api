@@ -1,10 +1,10 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { GosacService } from './gosac.service';
-import { CreateMessageDto } from './dto/message/create-message.dto';
+import { CreateMessageDto } from './dto/webhook/message/create-message.dto';
 
 @Controller('gosac')
 export class GosacController {
-  constructor(private readonly gosacService: GosacService) {}
+  constructor(private readonly gosacService: GosacService) { }
 
   @Post('message_create')
   message_create(@Body() createMessageDto: CreateMessageDto) {
