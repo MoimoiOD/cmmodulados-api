@@ -15,6 +15,7 @@ import { CreateQueueDto } from './dto/queue/create-queue.dto';
 import { CreateUserDto } from './dto/user/create-user.dto';
 import { CreateWhatsappDto } from './dto/whatsapp/create-whatsapp.dto';
 import { plainToInstance } from 'class-transformer';
+import { WabaTemplateService } from './gosac-service/waba-template.service';
 
 @Injectable()
 export class GosacService {
@@ -30,7 +31,9 @@ export class GosacService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     @InjectRepository(Whatsapp)
-    private readonly whatsappRepository: Repository<Whatsapp>
+    private readonly whatsappRepository: Repository<Whatsapp>,
+
+    private readonly wabaTemplateService: WabaTemplateService
   ) {}
 
   async create(createMessageDto: CreateMessageDto): Promise<void> {
@@ -82,6 +85,8 @@ export class GosacService {
     } else {
       console.log('Os dados da mensagem não foram informados.');
     }
+
+    await this.wabaTemplateService.startChatbot()
   }
 
   async createUser(createUserDto: CreateUserDto): Promise<void> {

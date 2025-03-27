@@ -8,13 +8,13 @@ export class GosacController {
 
   @Post('message_create')
   message_create(@Body() createMessageDto: CreateMessageDto) {
-    console.log('Message: ', createMessageDto.data);
-    console.log('Contact Message: ', createMessageDto.data.contact);
-    console.log('Ticket Message: ', createMessageDto.data.ticket);
-    console.log('User: ', createMessageDto.data.ticket?.user);
-    console.log('Queue: ', createMessageDto.data.ticket?.queue);
-    console.log('Contact', createMessageDto.data.ticket?.contact);
-    console.log('Whatsapp: ', createMessageDto.data.ticket?.whatsapp);
+    // console.log('Message: ', createMessageDto.data);
+    // console.log('Contact Message: ', createMessageDto.data.contact);
+    // console.log('Ticket Message: ', createMessageDto.data.ticket);
+    // console.log('User: ', createMessageDto.data.ticket?.user);
+    // console.log('Queue: ', createMessageDto.data.ticket?.queue);
+    // console.log('Contact', createMessageDto.data.ticket?.contact);
+    // console.log('Whatsapp: ', createMessageDto.data.ticket?.whatsapp);
     return this.gosacService.create(createMessageDto);
   }
 

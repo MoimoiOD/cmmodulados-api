@@ -9,12 +9,13 @@ import { Queue } from './entities/queue.entity';
 import { User } from './entities/user.entity';
 import { Whatsapp } from './entities/whatsapp.entity';
 import { GoogleDriverModule } from '../google-driver/google-driver.module';
+import { WabaTemplateService } from './gosac-service/waba-template.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Message, Contact, Ticket, Queue, User, Whatsapp]),
 GoogleDriverModule],
   controllers: [GosacController],
-  providers: [GosacService],
+  providers: [GosacService, GosacService, WabaTemplateService],
   exports: [TypeOrmModule],
 })
 export class GosacModule {}
