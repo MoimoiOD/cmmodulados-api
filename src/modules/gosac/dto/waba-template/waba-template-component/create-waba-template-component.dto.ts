@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsInt, IsOptional, IsString, ValidateNested } from "class-validator";
+import { IsArray, IsInt, IsOptional, IsString, ValidateNested } from "class-validator";
 import { CreateWabaComponentButtonDto } from "../waba-component-button/create-waba-component-button.dto";
 import { CreateWabaVariablesDescriptionsDto } from "../waba-variables-descriptions/create-waba-variables-descriptions.dto";
 
@@ -27,11 +27,13 @@ export class CreateWabaTemplateComponentDto {
   @IsString()
   text: string | null;
 
-  @ValidateNested()
+  @IsArray()
+  @ValidateNested({ each: true })
   @Type(() => CreateWabaComponentButtonDto)
-  wabaComponentButton?: CreateWabaComponentButtonDto | null;
+  wabaComponentButton: CreateWabaComponentButtonDto[] | null;
 
-  @ValidateNested()
+  @IsArray()
+  @ValidateNested({ each: true })
   @Type(() => CreateWabaVariablesDescriptionsDto)
-  wabaVariablesDescriptions?: CreateWabaVariablesDescriptionsDto | null;
+  wabaVariablesDescriptions: CreateWabaVariablesDescriptionsDto[] | null;
 }

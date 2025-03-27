@@ -6,5 +6,20 @@ export class WabaComponentButton {
   databaseId: number;
 
   @Column({ type: 'int' })
-  wabaComponentButton?: any[] | null;
+  id: number;
+
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  cType: string | null;
+  
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  text: string | null;
+  
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  url: string | null;
+  
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  phone_number: string | null;
+  
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  example: string | null;
 }

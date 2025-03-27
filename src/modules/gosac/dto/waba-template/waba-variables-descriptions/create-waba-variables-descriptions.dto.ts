@@ -1,7 +1,26 @@
-import { IsArray, IsOptional } from "class-validator";
+import { IsInt, IsOptional, IsString } from 'class-validator';
 
 export class CreateWabaVariablesDescriptionsDto {
-  @IsArray()
+  @IsInt()
+  id: number;
+
   @IsOptional()
-  wabaVariablesDescriptions?: any[] | null;
+  @IsInt()
+  wabaTemplateCo: number | null;
+
+  @IsOptional()
+  @IsString()
+  description: string | null;
+
+  @IsOptional()
+  @IsString()
+  variable: string | null;
+  
+  @IsOptional()
+  @IsString()
+  createdAt: string | null;
+  
+  @IsOptional()
+  @IsString()
+  updatedAt: string | null;
 }

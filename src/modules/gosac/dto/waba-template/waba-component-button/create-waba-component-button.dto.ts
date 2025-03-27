@@ -1,7 +1,26 @@
-import { IsArray, IsOptional } from "class-validator";
+import { IsArray, IsInt, IsOptional, IsString } from "class-validator";
 
 export class CreateWabaComponentButtonDto {
-  @IsArray()
+  @IsInt()
+  id: number;
+
   @IsOptional()
-  wabaComponentButton?: any[] | null;
+  @IsString()
+  cType: string | null;
+
+  @IsOptional()
+  @IsString()
+  text: string | null;
+
+  @IsOptional()
+  @IsString()
+  url: string | null;
+
+  @IsOptional()
+  @IsString()
+  phone_number: string | null;
+
+  @IsOptional()
+  @IsString()
+  example: string | null;
 }
