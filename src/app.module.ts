@@ -12,7 +12,7 @@ import { GoogleDriverModule } from './modules/google-driver/google-driver.module
       database: 'database.sqlite',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
-      // dropSchema: true,
+      dropSchema: true,
     }),
     GosacModule, GoogleDriverModule],
   controllers: [AppController],
