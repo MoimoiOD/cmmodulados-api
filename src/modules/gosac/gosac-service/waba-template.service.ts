@@ -40,7 +40,7 @@ export class WabaTemplateService {
       return;
     }
     for (const wabaTemplate of createWabaTemplateDto) {
-      await this.saveConnection(wabaTemplate);
+      let connection = await this.saveConnection(wabaTemplate);
       await this.saveWabaComponentButton(wabaTemplate);
       await this.saveWabaVariablesDescription(wabaTemplate);
     }
@@ -48,10 +48,10 @@ export class WabaTemplateService {
     // console.log(createWabaTemplateDto[0].wabaTemplateComponents![0].wabaComponentButton);
   }
 
-  async createConnection(createConnectionDto: CreateConnectionDto): Promise<void> {
+  async createConnection(createConnectionDto: CreateConnectionDto): Promise<Connection | null> {
     if (!createConnectionDto) {
       console.log('A conexão não foi informada.');
-      return;
+      return null;
     }
     const existingConnection = await this.connectionRepository.findOneBy({ id: createConnectionDto.id });
     
@@ -65,17 +65,19 @@ export class WabaTemplateService {
       }
     } else {
       const connection = this.connectionRepository.create(createConnectionDto);
-      await this.connectionRepository.save(connection);
       console.log(`Nova conexão com ID ${createConnectionDto.id} foi criado.`);
+      return await this.connectionRepository.save(connection);
     }
+    return null;
   }
 
-  async saveConnection(createWabaTemplateDto: CreateWabaTemplateDto): Promise<void> {
+  async saveConnection(createWabaTemplateDto: CreateWabaTemplateDto): Promise<Connection | null> {
     const connection = createWabaTemplateDto.connection;
     if (connection) {
-      await this.createConnection(connection);
+      return await this.createConnection(connection);
     } else {
       console.log('Não há conexões existentes.');
+      return null
     }
   }
 
