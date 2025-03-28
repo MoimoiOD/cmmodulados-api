@@ -8,6 +8,8 @@ import { CreateWabaTemplateDto } from '../dto/waba-template/create-waba-template
 import { CreateConnectionDto } from '../dto/waba-template/connection/create-connection.dto';
 import { CreateWabaComponentButtonDto } from '../dto/waba-template/waba-component-button/create-waba-component-button.dto';
 import { WabaComponentButton } from '../entities/waba-template/waba-component-button.entity';
+import { CreateWabaVariablesDescriptionsDto } from '../dto/waba-template/waba-variables-descriptions/create-waba-variables-descriptions.dto';
+import { WabaVariablesDescriptions } from '../entities/waba-template/waba-variables-descriptions.entity';
 
 @Injectable()
 export class WabaTemplateService {
@@ -23,6 +25,8 @@ export class WabaTemplateService {
     private readonly wabaTemplateComponentRepository: Repository<WabaTemplateComponent>,
     @InjectRepository(WabaComponentButton)
     private readonly wabaComponentButtonRepository: Repository<WabaComponentButton>,
+    @InjectRepository(WabaVariablesDescriptions)
+    private readonly wabaVariablesDescriptionsRepository: Repository<WabaVariablesDescriptions>,
   ) {}
 
   async startChatbot(): Promise<any> {
@@ -38,8 +42,10 @@ export class WabaTemplateService {
     for (const wabaTemplate of createWabaTemplateDto) {
       await this.saveConnection(wabaTemplate);
       await this.saveWabaComponentButton(wabaTemplate);
+      await this.saveWabaVariablesDescription(wabaTemplate);
     }
-    // console.log(createWabaTemplateDto);
+    // console.log(createWabaTemplateDto[0].wabaTemplateComponents);
+    // console.log(createWabaTemplateDto[0].wabaTemplateComponents![0].wabaComponentButton);
   }
 
   async createConnection(createConnectionDto: CreateConnectionDto): Promise<void> {
@@ -96,11 +102,58 @@ export class WabaTemplateService {
   }
 
   async saveWabaComponentButton(createWabaTemplateDto: CreateWabaTemplateDto): Promise<void> {
-    const wabaComponentButton: WabaComponentButton[] = createWabaTemplateDto.wabaTemplateComponents?.map((wabaComponent) => wabaComponent);
-    if (wabaComponentButton) {
-      await this.createWabaComponentButton(wabaComponentButton);
+    const wabaTemplateComponents = createWabaTemplateDto.wabaTemplateComponents;
+    if (!wabaTemplateComponents || wabaTemplateComponents.length === 0) {
+      console.log('Não há componentes, logo não há botões para salvar.');
+      return;
+    }
+    for (const wabaTemplateComponent of wabaTemplateComponents) {
+      if(!wabaTemplateComponent.wabaComponentButton || wabaTemplateComponent.wabaComponentButton.length === 0) {
+        console.log('Não há botões de componente para salvar.');
+        continue;
+      }
+      for(const wabaComponentButton of wabaTemplateComponent.wabaComponentButton) {
+        await this.createWabaComponentButton(wabaComponentButton);
+      }
+    }
+  }
+
+  async createWabaVariablesDescription(createWabaVariablesDescriptionDto: CreateWabaVariablesDescriptionsDto): Promise<void> {
+    if (!createWabaVariablesDescriptionDto) {
+      console.log('As variáveis não foram informadas.');
+      return;
+    }
+    const existingWabaVariablesDescription = await this.wabaVariablesDescriptionsRepository.findOneBy({ id: createWabaVariablesDescriptionDto.id });
+    
+    if (existingWabaVariablesDescription) {
+      const hasChanges = JSON.stringify(existingWabaVariablesDescription) !== JSON.stringify(createWabaVariablesDescriptionDto);
+      if (!hasChanges) {
+        await this.wabaVariablesDescriptionsRepository.update(existingWabaVariablesDescription.id, createWabaVariablesDescriptionDto);
+        console.log(`Variável com ID ${existingWabaVariablesDescription.id} foi atualizado.`);
+      } else {
+        console.log(`Variável com ID ${existingWabaVariablesDescription.id} já existe e os dados são compatíveis.`);
+      }
     } else {
-      console.log('Não há botões existentes.');
+      const wabaVariablesDescription = this.wabaVariablesDescriptionsRepository.create(createWabaVariablesDescriptionDto);
+      await this.wabaVariablesDescriptionsRepository.save(wabaVariablesDescription);
+      console.log(`Nova variável com ID ${createWabaVariablesDescriptionDto.id} foi criado.`);
+    }
+  }
+
+  async saveWabaVariablesDescription(createWabaTemplateDto: CreateWabaTemplateDto): Promise<void> {
+    const wabaTemplateComponents = createWabaTemplateDto.wabaTemplateComponents;
+    if (!wabaTemplateComponents || wabaTemplateComponents.length === 0) {
+      console.log('Não há componentes, logo não há variáveis para salvar.');
+      return;
+    }
+    for (const wabaTemplateComponent of wabaTemplateComponents) {
+      if(!wabaTemplateComponent.wabaVariablesDescriptions || wabaTemplateComponent.wabaVariablesDescriptions.length === 0) {
+        console.log('Não há variáveis de componente para salvar.');
+        continue;
+      }
+      for(const wabaVariablesDescriptions of wabaTemplateComponent.wabaVariablesDescriptions) {
+        await this.createWabaVariablesDescription(wabaVariablesDescriptions);
+      }
     }
   }
 
