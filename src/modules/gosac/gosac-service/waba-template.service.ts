@@ -10,6 +10,7 @@ import { CreateWabaComponentButtonDto } from '../dto/waba-template/waba-componen
 import { WabaComponentButton } from '../entities/waba-template/waba-component-button.entity';
 import { CreateWabaVariablesDescriptionsDto } from '../dto/waba-template/waba-variables-descriptions/create-waba-variables-descriptions.dto';
 import { WabaVariablesDescriptions } from '../entities/waba-template/waba-variables-descriptions.entity';
+import { CreateWabaTemplateComponentDto } from '../dto/waba-template/waba-template-component/create-waba-template-component.dto';
 
 @Injectable()
 export class WabaTemplateService {
@@ -40,18 +41,18 @@ export class WabaTemplateService {
       return;
     }
     for (const wabaTemplate of createWabaTemplateDto) {
-      let connection = await this.saveConnection(wabaTemplate);
-      await this.saveWabaComponentButton(wabaTemplate);
-      await this.saveWabaVariablesDescription(wabaTemplate);
+      await this.saveConnection(wabaTemplate);
+      // await this.saveWabaComponentButton(wabaTemplate);
+      // await this.saveWabaVariablesDescription(wabaTemplate);
+      await this.saveWabaTemplateComponent(wabaTemplate);
     }
     // console.log(createWabaTemplateDto[0].wabaTemplateComponents);
     // console.log(createWabaTemplateDto[0].wabaTemplateComponents![0].wabaComponentButton);
   }
 
-  async createConnection(createConnectionDto: CreateConnectionDto): Promise<Connection | null> {
+  async createConnection(createConnectionDto: CreateConnectionDto): Promise<void> {
     if (!createConnectionDto) {
       console.log('A conexão não foi informada.');
-      return null;
     }
     const existingConnection = await this.connectionRepository.findOneBy({ id: createConnectionDto.id });
     
@@ -64,27 +65,24 @@ export class WabaTemplateService {
         console.log(`Conexão com ID ${existingConnection.id} já existe e os dados são compatíveis.`);
       }
     } else {
-      const connection = this.connectionRepository.create(createConnectionDto);
       console.log(`Nova conexão com ID ${createConnectionDto.id} foi criado.`);
-      return await this.connectionRepository.save(connection);
+      const connection = this.connectionRepository.create(createConnectionDto);
+      await this.connectionRepository.save(connection);
     }
-    return null;
   }
 
-  async saveConnection(createWabaTemplateDto: CreateWabaTemplateDto): Promise<Connection | null> {
+  async saveConnection(createWabaTemplateDto: CreateWabaTemplateDto): Promise<void> {
     const connection = createWabaTemplateDto.connection;
     if (connection) {
-      return await this.createConnection(connection);
+      await this.createConnection(connection);
     } else {
       console.log('Não há conexões existentes.');
-      return null
     }
   }
 
   async createWabaComponentButton(createWabaComponentButtonDto: CreateWabaComponentButtonDto): Promise<void> {
     if (!createWabaComponentButtonDto) {
       console.log('Os botões não foram informados.');
-      return;
     }
     const existingWabaComponentButton = await this.wabaComponentButtonRepository.findOneBy({ id: createWabaComponentButtonDto.id });
     
@@ -156,6 +154,51 @@ export class WabaTemplateService {
       for(const wabaVariablesDescriptions of wabaTemplateComponent.wabaVariablesDescriptions) {
         await this.createWabaVariablesDescription(wabaVariablesDescriptions);
       }
+    }
+  }
+
+  async createWabaTemplateComponent(createWabaTemplateComponentDto: CreateWabaTemplateComponentDto): Promise<void> {
+    if (!createWabaTemplateComponentDto) {
+      console.log('Os componentes não foram informados.');
+    }
+    const existingWabaTemplateComponent = await this.wabaTemplateComponentRepository.findOneBy({ id: createWabaTemplateComponentDto.id });
+    
+    if (existingWabaTemplateComponent) {
+      const hasChanges = JSON.stringify(existingWabaTemplateComponent) !== JSON.stringify(createWabaTemplateComponentDto);
+      if (!hasChanges) {
+        await this.wabaTemplateComponentRepository.update(existingWabaTemplateComponent.id, createWabaTemplateComponentDto);
+        console.log(`Componente com ID ${existingWabaTemplateComponent.id} foi atualizado.`);
+      } else {
+        console.log(`Componente com ID ${existingWabaTemplateComponent.id} já existe e os dados são compatíveis.`);
+      }
+    } else {
+      const wabaTemplateComponent = this.wabaTemplateComponentRepository.create(createWabaTemplateComponentDto);
+      
+      if (createWabaTemplateComponentDto.wabaComponentButton) {
+        wabaTemplateComponent.wabaComponentButton = createWabaTemplateComponentDto.wabaComponentButton.map((buttonDto) =>
+          this.wabaComponentButtonRepository.create(buttonDto)
+        );
+      }
+
+      if (createWabaTemplateComponentDto.wabaVariablesDescriptions) {
+        wabaTemplateComponent.wabaVariablesDescriptions = createWabaTemplateComponentDto.wabaVariablesDescriptions.map((variableDto) =>
+          this.wabaVariablesDescriptionsRepository.create(variableDto),
+        );
+      }
+      
+      await this.wabaTemplateComponentRepository.save(wabaTemplateComponent);
+      console.log(`Novo componente com ID ${createWabaTemplateComponentDto.id} foi criado.`);
+    }
+  }
+
+  async saveWabaTemplateComponent(createWabaTemplateDto: CreateWabaTemplateDto): Promise<void> {
+    const wabaTemplateComponents = createWabaTemplateDto.wabaTemplateComponents;
+    if (!wabaTemplateComponents || wabaTemplateComponents.length === 0) {
+      console.log('Não há componentes para salvar.');
+      return;
+    }
+    for (const wabaTemplateComponent of wabaTemplateComponents) {
+      await this.createWabaTemplateComponent(wabaTemplateComponent);
     }
   }
 

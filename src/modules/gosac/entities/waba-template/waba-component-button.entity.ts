@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { WabaTemplateComponent } from './waba-template-component.entity';
 
 @Entity()
 export class WabaComponentButton {
@@ -22,4 +23,8 @@ export class WabaComponentButton {
   
   @Column({ type: 'varchar', length: 255, nullable: true })
   example: string | null;
+
+  @ManyToOne(() => WabaTemplateComponent, (component) => component.wabaComponentButton)
+  @JoinColumn({ name: 'wabaTemplateComponentId' })
+  wabaTemplateComponent: WabaTemplateComponent;
 }

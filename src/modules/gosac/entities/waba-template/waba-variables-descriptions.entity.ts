@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { WabaTemplateComponent } from "./waba-template-component.entity";
 
 @Entity()
 export class WabaVariablesDescriptions {
@@ -22,4 +23,8 @@ export class WabaVariablesDescriptions {
 
     @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP', nullable: true })
     updatedAt: string | null;
+
+    @ManyToOne(() => WabaTemplateComponent, (component) => component.wabaVariablesDescriptions)
+    @JoinColumn({ name: 'wabaTemplateComponentId' })
+    wabaTemplateComponent: WabaTemplateComponent;
 }

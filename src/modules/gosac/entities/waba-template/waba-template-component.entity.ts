@@ -25,11 +25,11 @@ export class WabaTemplateComponent {
     @Column({ type: 'varchar', length: 255, nullable: true })
     text: string | null;
 
-    @OneToMany(() => WabaComponentButton, (component) => component.databaseId)
+    @OneToMany(() => WabaComponentButton, (component) => component.databaseId, { cascade: true })
     @JoinColumn({ name: 'wabaComponentButtonId' })
     wabaComponentButton: WabaComponentButton[] | null;
 
-    @OneToMany(() => WabaVariablesDescriptions, (component) => component.databaseId)
+    @OneToMany(() => WabaVariablesDescriptions, (component) => component.databaseId, { cascade: true })
     @JoinColumn({ name: 'wabaVariablesDescriptionsId' })
     wabaVariablesDescriptions: WabaVariablesDescriptions[] | null;
 }
